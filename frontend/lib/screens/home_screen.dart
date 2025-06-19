@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:house_price_estimator/screens/input_form_screen.dart';
+import 'package:frontend/screens/input_form_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

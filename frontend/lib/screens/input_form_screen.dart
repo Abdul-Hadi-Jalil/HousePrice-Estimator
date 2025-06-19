@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:house_price_estimator/screens/result_screen.dart';
+import 'package:frontend/screens/result_screen.dart';
 
 class InputFormScreen extends StatefulWidget {
   const InputFormScreen({super.key});

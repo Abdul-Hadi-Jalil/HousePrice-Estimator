@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:house_price_estimator/screens/home_screen.dart';
+import 'package:frontend/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
