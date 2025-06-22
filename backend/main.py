@@ -28,7 +28,6 @@ class PredictionResult(BaseModel):
     prediction: float
 
 
-# Fix: Use @app.post, not @app.route
 @app.post("/predict", response_model=PredictionResult)
 async def predict_property(data: PredictionInput):
     input_features = data.dict()

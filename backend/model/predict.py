@@ -1,10 +1,24 @@
 import pandas as pd
 from joblib import load
+from pathlib import Path
+
+# Get the directory where predict.py is located
+MODEL_DIR = Path(__file__).parent  # Points to /backend/model/
+MODEL_PATH = MODEL_DIR / "knn_model_house_price_estimator.joblib"  # Full path to model
+
+CITY_ENCODER_DIR = Path(__file__).parent
+CITY_ENCODER_PATH = CITY_ENCODER_DIR / "label_encoder_city.joblib"
+
+LOCATION_ENCODER_DIR = Path(__file__).parent
+LOCATION_ENCODER_PATH = LOCATION_ENCODER_DIR / "label_encoder_location.joblib"
+
+# Load the model
+model = load(MODEL_PATH)
 
 # Load model and encoders (do this once when the module loads)
-knn_model = load("knn_model_house_price_estimator.joblib")
-city_encoder = load("label_encoder_city.joblib")  # Renamed for clarity
-location_encoder = load("label_encoder_location.joblib")
+knn_model = load(MODEL_PATH)
+city_encoder = load(CITY_ENCODER_PATH)  # Renamed for clarity
+location_encoder = load(LOCATION_ENCODER_PATH)
 
 
 def predict_property_price(input_data):
