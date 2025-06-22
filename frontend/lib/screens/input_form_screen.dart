@@ -30,25 +30,51 @@ class _InputFormScreenState extends State<InputFormScreen> {
                 leadingIcon: Icon(Icons.location_city),
                 menuHeight: 200,
                 dropdownMenuEntries: [
+                  DropdownMenuEntry<String>(value: 'G-10', label: 'G-10'),
+                  DropdownMenuEntry<String>(value: 'E-11', label: 'E-11'),
+                  DropdownMenuEntry<String>(value: 'G-15', label: 'G-15'),
                   DropdownMenuEntry<String>(
-                    value: 'DHA, Lahore',
-                    label: 'DHA, Lahore',
+                    value: 'Defence Fort',
+                    label: 'Defence Fort',
                   ),
                   DropdownMenuEntry<String>(
-                    value: 'Valencia, Lahore',
-                    label: 'Valencia, Lahore',
+                    value: 'Sihala Valley',
+                    label: 'Sihala Valley',
                   ),
                   DropdownMenuEntry<String>(
-                    value: 'Eden City, Lahore',
-                    label: 'Eden City, Lahore',
+                    value: 'Shahra-e-Liaquat',
+                    label: 'Shahra-e-Liaquat',
+                  ),
+                ],
+              ),
+              DropdownMenu<String>(
+                width: 400,
+                label: Text('Property Type'),
+
+                menuHeight: 200,
+                dropdownMenuEntries: [
+                  DropdownMenuEntry<String>(value: 'Flat', label: 'Flat'),
+                  DropdownMenuEntry<String>(value: 'House', label: 'House'),
+                ],
+              ),
+              DropdownMenu<String>(
+                width: 400,
+                label: Text('City'),
+                menuHeight: 200,
+                dropdownMenuEntries: [
+                  DropdownMenuEntry<String>(value: 'Karachi', label: 'Karachi'),
+                  DropdownMenuEntry<String>(value: 'Lahore', label: 'Lahore'),
+                  DropdownMenuEntry<String>(
+                    value: 'Faisalabad',
+                    label: 'Faisalabad',
                   ),
                   DropdownMenuEntry<String>(
-                    value: 'Pine Avenue, Lahore',
-                    label: 'Pine Avenue, Lahore',
+                    value: 'Rawalpindi',
+                    label: 'Rawalpindi',
                   ),
                   DropdownMenuEntry<String>(
-                    value: 'Wapda Town, Lahore',
-                    label: 'Wapda Town, Lahore',
+                    value: 'Islamabad',
+                    label: 'Islamabad',
                   ),
                 ],
               ),
@@ -57,7 +83,7 @@ class _InputFormScreenState extends State<InputFormScreen> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    label: Text('Area (sq. ft.)'),
+                    label: Text('Area in Marla'),
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -82,26 +108,7 @@ class _InputFormScreenState extends State<InputFormScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                width: 400,
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    label: Text('Year Built (Optional)'),
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              DropdownMenu<String>(
-                width: 400,
-                label: Text('Condition (Optional)'),
-                menuHeight: 200,
-                dropdownMenuEntries: [
-                  DropdownMenuEntry<String>(value: 'Poor', label: 'Poor'),
-                  DropdownMenuEntry<String>(value: 'Good', label: 'Good'),
-                  DropdownMenuEntry<String>(value: 'Fair', label: 'Fair'),
-                ],
-              ),
+
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
