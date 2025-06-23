@@ -36,7 +36,9 @@ class _InputFormScreenState extends State<InputFormScreen> {
     );
 
     if (response.statusCode == 200) {
-      return response.body;
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      final double predictionValue = data['prediction'];
+      return predictionValue;
     }
   }
 
@@ -170,8 +172,8 @@ class _InputFormScreenState extends State<InputFormScreen> {
 
               SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {
-                  final predictionResult = startPrediction();
+                onPressed: () async {
+                  final predictionResult = await startPrediction();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
