@@ -21,7 +21,7 @@ class ResultScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center, // Center vertically
             children: [
               Text(
-                'Estimated Value: $predictionResult',
+                'Estimated Value: Rs $predictionResult',
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
