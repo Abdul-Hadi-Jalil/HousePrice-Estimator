@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/result_screen.dart';
+import 'package:http/http.dart' as http;
 
 class InputFormScreen extends StatefulWidget {
   const InputFormScreen({super.key});
@@ -9,6 +12,42 @@ class InputFormScreen extends StatefulWidget {
 }
 
 class _InputFormScreenState extends State<InputFormScreen> {
+  String? selectedLocation;
+  String? selectedCity;
+  String? selectedPropertyType;
+  final TextEditingController bedroomController = TextEditingController();
+  TextEditingController bathroomController = TextEditingController();
+  TextEditingController areaInMarlaController = TextEditingController();
+
+  Future<dynamic> startPrediction() async {
+    final predictionData = {
+      'location': selectedLocation,
+      'property_type': selectedPropertyType,
+      'city': selectedCity,
+      'baths': bathroomController.text,
+      'bedrooms': bedroomController.text,
+      'Area_in_Marla': areaInMarlaController.text,
+    };
+
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8000/predict'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(predictionData),
+    );
+
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+  }
+
+  @override
+  void dispose() {
+    areaInMarlaController.dispose();
+    bathroomController.dispose();
+    bedroomController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +64,12 @@ class _InputFormScreenState extends State<InputFormScreen> {
               ),
               SizedBox(height: 30),
               DropdownMenu<String>(
+                initialSelection: selectedLocation,
+                onSelected: (String? value) {
+                  setState(() {
+                    selectedLocation = value;
+                  });
+                },
                 width: 400,
                 label: Text('Location'),
                 leadingIcon: Icon(Icons.location_city),
@@ -48,9 +93,14 @@ class _InputFormScreenState extends State<InputFormScreen> {
                 ],
               ),
               DropdownMenu<String>(
+                initialSelection: selectedPropertyType,
+                onSelected: (String? value) {
+                  setState(() {
+                    selectedPropertyType = value;
+                  });
+                },
                 width: 400,
                 label: Text('Property Type'),
-
                 menuHeight: 200,
                 dropdownMenuEntries: [
                   DropdownMenuEntry<String>(value: 'Flat', label: 'Flat'),
@@ -58,6 +108,12 @@ class _InputFormScreenState extends State<InputFormScreen> {
                 ],
               ),
               DropdownMenu<String>(
+                initialSelection: selectedCity,
+                onSelected: (String? value) {
+                  setState(() {
+                    selectedCity = value;
+                  });
+                },
                 width: 400,
                 label: Text('City'),
                 menuHeight: 200,
@@ -81,6 +137,7 @@ class _InputFormScreenState extends State<InputFormScreen> {
               SizedBox(
                 width: 400,
                 child: TextFormField(
+                  controller: areaInMarlaController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     label: Text('Area in Marla'),
@@ -91,6 +148,7 @@ class _InputFormScreenState extends State<InputFormScreen> {
               SizedBox(
                 width: 400,
                 child: TextFormField(
+                  controller: bedroomController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     label: Text('Bedrooms'),
@@ -101,6 +159,7 @@ class _InputFormScreenState extends State<InputFormScreen> {
               SizedBox(
                 width: 400,
                 child: TextFormField(
+                  controller: bathroomController,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     label: Text('Bathrooms'),
@@ -112,9 +171,13 @@ class _InputFormScreenState extends State<InputFormScreen> {
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
+                  final predictionResult = startPrediction();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ResultScreen()),
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ResultScreen(predictionResult: predictionResult),
+                    ),
                   );
                 },
                 style: ButtonStyle(

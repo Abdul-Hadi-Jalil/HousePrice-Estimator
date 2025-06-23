@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  final dynamic predictionResult;
+
+  const ResultScreen({super.key, required this.predictionResult});
 
   @override
   Widget build(BuildContext context) {
