@@ -4,6 +4,12 @@ A Flutter and Python machine learning prototype that estimates property prices f
 
 The project connects a form-based client to a FastAPI inference service and a persisted K-nearest-neighbors model. It demonstrates categorical preprocessing, a typed prediction API, and model integration in an interactive application.
 
+## Interface preview
+
+The responsive estimator form collects the same features expected by the prediction API:
+
+![HousePrice Estimator property input form](docs/images/estimator-form.png)
+
 ## Stack
 
 | Layer | Technologies |
